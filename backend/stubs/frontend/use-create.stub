@@ -1,0 +1,81 @@
+import { useMutation, UseMutationResult, useQueryClient } from '@tanstack/react-query';
+
+import { Create{entity}UseCase } from '@/modules/{moduleKebab}/application/use-cases/{entityKebabPlural}/create-{entityKebab}-use-case';
+import { type {entity} } from '@/modules/{moduleKebab}/domain/entities/{entity}';
+import { {entity}Repository } from '@/modules/{moduleKebab}/infrastructure/repositories/{entityKebab}-repository';
+import { type ApiResponse, type PaginatedApiResponse } from '@/types/ApiResponse';
+
+import { {entityCamel}Config } from '../../config/{entityKebab}-config';
+
+type Create{entity}MutationContext = {
+  previous{entityPlural}: [string[], ApiResponse<PaginatedApiResponse<{entity}[]>> | undefined][];
+};
+
+export const useCreate{entity} = (): UseMutationResult<
+  ApiResponse<{entity}>,
+  Error,
+  Omit<{entity}, 'id' | 'createdAt' | 'updatedAt'>,
+  Create{entity}MutationContext
+> => {
+  const queryClient = useQueryClient();
+
+  return useMutation<
+    ApiResponse<{entity}>,
+    Error,
+    Omit<{entity}, 'id' | 'createdAt' | 'updatedAt'>,
+    Create{entity}MutationContext
+  >({
+    mutationFn: ({entityCamel}) => {
+      const {entityCamel}Repository = new {entity}Repository();
+      const create{entity}UseCase = new Create{entity}UseCase({entityCamel}Repository);
+      return create{entity}UseCase.execute({entityCamel});
+    },
+    mutationKey: [{entityCamel}Config.queryKey, 'create'],
+    onError: (_, __, context) => {
+      if (context?.previous{entityPlural}) {
+        for (const [queryKey, data] of context.previous{entityPlural}) {
+          queryClient.setQueryData(queryKey, data);
+        }
+      }
+    },
+    onMutate: async (new{entity}) => {
+      const queryKeyPrefix = [{entityCamel}Config.queryKey];
+      await queryClient.cancelQueries({ queryKey: queryKeyPrefix });
+      const previous{entityPlural} = queryClient.getQueriesData<ApiResponse<PaginatedApiResponse<{entity}[]>>>({
+        queryKey: queryKeyPrefix,
+      }) as [string[], ApiResponse<PaginatedApiResponse<{entity}[]>> | undefined][];
+      const targetQueryKey = [{entityCamel}Config.queryKey, 1, 10, '', JSON.stringify({})];
+      queryClient.setQueriesData<ApiResponse<PaginatedApiResponse<{entity}[]>>>(
+        { queryKey: targetQueryKey },
+        (old) => {
+          if (!old?.data?.data) return old;
+          const optimistic{entity}: {entity} = {
+            ...new{entity},
+            createdAt: new Date().toISOString(),
+            id: -Date.now(),
+            updatedAt: new Date().toISOString(),
+          };
+          return {
+            ...old,
+            data: {
+              ...old.data,
+              data: [optimistic{entity}, ...old.data.data],
+              meta: {
+                ...old.data.meta,
+                to: old.data.meta.to + 1,
+                total: old.data.meta.total + 1,
+              },
+            },
+          };
+        }
+      );
+      return { previous{entityPlural} };
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({
+        exact: false,
+        queryKey: [{entityCamel}Config.queryKey],
+      });
+    },
+  });
+};

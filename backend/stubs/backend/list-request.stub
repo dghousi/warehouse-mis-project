@@ -1,0 +1,36 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Modules\{{ module }}\Infrastructure\Http\Requests\{{ entity }};
+
+use App\Modules\Common\Infrastructure\Http\Requests\BaseListRequest;
+
+final class List{{ entityPlural }}Request extends BaseListRequest
+{
+    protected static function sortableColumns(): array
+    {
+        return {{ list_sortable }};
+    }
+
+    protected static function allowedRelations(): array
+    {
+        return {{ list_relations }};
+    }
+
+    protected static function filters(): array
+    {
+        return {{ list_filters }};
+    }
+
+    protected static function searchableColumns(): array
+    {
+        return {{ list_searchable }};
+    }
+
+    protected static function fieldableColumns(): array
+    {
+        return {{ list_fieldable }};
+    }
+
+}

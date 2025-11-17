@@ -1,0 +1,25 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Modules\{{ module }}\Infrastructure\Http\Requests\{{ entity }};
+
+use App\Modules\Common\Infrastructure\Http\Requests\BulkDeleteRequest;
+
+final class BulkDelete{{ entityPlural }}Request extends BulkDeleteRequest
+{
+    protected function tableName(): string
+    {
+        return '{{ entitySnakePlural }}';
+    }
+
+    protected function entityName(): string
+    {
+        return '{{ entityHeadLine }}';
+    }
+
+    public function authorize(): bool
+    {
+        return true;
+    }
+}

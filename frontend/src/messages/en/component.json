@@ -1,0 +1,30 @@
+{
+  "selectLocale": "Select Locale",
+  "searchForACommand": "Search for a command to run...",
+  "commandPalette": "Command Palette",
+  "passwordIsRequired": "Password is required",
+  "submitting": "Submitting...",
+  "pagination": {
+    "showing": "Showing",
+    "to": "to",
+    "of": "of",
+    "results": "results",
+    "rowsPerPage": "Rows per page",
+    "page": "Page",
+    "goToFirstPage": "Go to first page",
+    "goToPreviousPage": "Go to previous page",
+    "goToNextPage": "Go to next page",
+    "goToLastPage": "Go to last page"
+  },
+  "table": {
+    "noResultsFound": "No results found.",
+    "clearFilters": "Clear filters",
+    "selected": "{count} selected"
+  },
+  "form": {
+    "loading": "Loading...",
+    "loadingMore": "Loading more...",
+    "noResultsFound": "No results found.",
+    "search": "Search..."
+  }
+}

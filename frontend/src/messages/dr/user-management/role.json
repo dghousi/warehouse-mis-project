@@ -1,0 +1,60 @@
+{
+  "config": {
+    "title": "نقش ها",
+    "entity": "نقش",
+    "table": {
+      "add": "افزودن نقش",
+      "create": "ایجاد نقش",
+      "edit": "ویرایش نقش",
+      "update": "به‌روزرسانی نقش",
+      "displayName": "Display Name",
+      "permissions": "Permissions"
+    },
+    "form": {
+      "name": {
+        "label": "نام",
+        "validation": {
+          "required": "نام الزامی است",
+          "maxLength": "نام باید ۲۵۵ کاراکتر یا کمتر باشد"
+        }
+      },
+      "displayNameEn": {
+        "label": "نام نمایشی انگلیسی",
+        "validation": {
+          "maxLength": "نام نمایشی انگلیسی باید ۲۵۵ کاراکتر یا کمتر باشد"
+        }
+      },
+      "displayNamePs": {
+        "label": "نام نمایشی پشتو",
+        "validation": {
+          "maxLength": "نام نمایشی پشتو باید ۲۵۵ کاراکتر یا کمتر باشد"
+        }
+      },
+      "displayNameDr": {
+        "label": "نام نمایشی دری",
+        "validation": {
+          "maxLength": "نام نمایشی دری باید ۲۵۵ کاراکتر یا کمتر باشد"
+        }
+      },
+      "guardName": {
+        "label": "نام محافظ",
+        "validation": {
+          "maxLength": "نام محافظ باید ۲۵۵ کاراکتر یا کمتر باشد"
+        }
+      }
+    },
+    "repository": {
+      "createFailed": "ایجاد نقش ناکام شد",
+      "fetchFailed": "بازیابی نقش ناکام شد",
+      "updateFailed": "به‌روزرسانی نقش ناکام شد",
+      "deleteFailed": "حذف نقش ناکام شد",
+      "fetchManyFailed": "بازیابی نقش‌ها ناکام شد",
+      "fetchManySuccess": "نقش‌ها با موفقیت بازیابی شدند"
+    },
+    "presentation": {
+      "createSuccess": "Role created successfully",
+      "updateSuccess": "Role updated successfully",
+      "deleteSuccess": "Role deleted successfully"
+    }
+  }
+}

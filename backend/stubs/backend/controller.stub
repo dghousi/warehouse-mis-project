@@ -1,0 +1,130 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Modules\{{ module }}\Infrastructure\Http\Controllers;
+
+use App\Modules\Common\Application\DTOs\QuerySpecification;
+use App\Modules\Common\Infrastructure\Http\Controllers\BaseApiController;
+use App\Modules\Common\Infrastructure\Resources\PaginatedResource;
+use App\Modules\{{ module }}\Application\DTOs\{{ entity }}Data;
+use App\Modules\{{ module }}\Application\UseCases\{{ entity }}\BulkDelete{{ entityPlural }}UseCase;
+use App\Modules\{{ module }}\Application\UseCases\{{ entity }}\Create{{ entity }}UseCase;
+use App\Modules\{{ module }}\Application\UseCases\{{ entity }}\Delete{{ entity }}UseCase;
+use App\Modules\{{ module }}\Application\UseCases\{{ entity }}\ForceDelete{{ entity }}UseCase;
+use App\Modules\{{ module }}\Application\UseCases\{{ entity }}\Get{{ entity }}UseCase;
+use App\Modules\{{ module }}\Application\UseCases\{{ entity }}\List{{ entityPlural }}UseCase;
+use App\Modules\{{ module }}\Application\UseCases\{{ entity }}\Restore{{ entity }}UseCase;
+use App\Modules\{{ module }}\Application\UseCases\{{ entity }}\Update{{ entity }}UseCase;
+use App\Modules\{{ module }}\Infrastructure\Http\Requests\{{ entity }}\BulkDelete{{ entityPlural }}Request;
+use App\Modules\{{ module }}\Infrastructure\Http\Requests\{{ entity }}\List{{ entityPlural }}Request;
+use App\Modules\{{ module }}\Infrastructure\Http\Requests\{{ entity }}\Store{{ entity }}Request;
+use App\Modules\{{ module }}\Infrastructure\Http\Requests\{{ entity }}\Update{{ entity }}Request;
+use App\Modules\{{ module }}\Infrastructure\Resources\{{ entity }}Resource;
+use Illuminate\Http\JsonResponse;
+
+final class {{ entity }}Controller extends BaseApiController
+{
+    public function __construct(
+        private readonly List{{ entityPlural }}UseCase $list{{ entityPlural }}UseCase,
+        private readonly Get{{ entity }}UseCase $get{{ entity }}UseCase,
+        private readonly Restore{{ entity }}UseCase $restore{{ entity }}UseCase,
+        private readonly Create{{ entity }}UseCase $create{{ entity }}UseCase,
+        private readonly Update{{ entity }}UseCase $update{{ entity }}UseCase,
+        private readonly Delete{{ entity }}UseCase $delete{{ entity }}UseCase,
+        private readonly ForceDelete{{ entity }}UseCase $forceDelete{{ entity }}UseCase,
+        private readonly BulkDelete{{ entityPlural }}UseCase $bulkDelete{{ entityPlural }}UseCase,
+    ) {}
+
+    public function index(List{{ entityPlural }}Request $list{{ entityPlural }}Request): JsonResponse
+    {
+        $querySpecification = QuerySpecification::fromArray($list{{ entityPlural }}Request->validated());
+
+        $lengthAwarePaginator = $this->list{{ entityPlural }}UseCase->execute($querySpecification);
+
+        $paginatedResource = new PaginatedResource($lengthAwarePaginator, {{ entity }}Resource::class);
+
+        return $this->successResponse(
+            data: $paginatedResource,
+            message: __('{{ module }}::messages.{{ entitySnakePlural }}.fetched')
+        );
+    }
+
+    public function store(Store{{ entity }}Request $store{{ entity }}Request): JsonResponse
+    {
+        ${{ entityCamel }}Data = {{ entity }}Data::fromArray($store{{ entity }}Request->validated());
+        ${{ entityCamel }} = $this->create{{ entity }}UseCase->execute({{ entityCamel }}Data: ${{ entityCamel }}Data);
+
+        return $this->successResponse(
+            data: new {{ entity }}Resource(resource: ${{ entityCamel }}),
+            message: __('{{ module }}::messages.{{ entitySnake }}.created'),
+            code: 201
+        );
+    }
+
+    public function show(int $id): JsonResponse
+    {
+        ${{ entityCamel }} = $this->get{{ entity }}UseCase->execute($id);
+
+        return $this->successResponse(
+            data: new {{ entity }}Resource(resource: ${{ entityCamel }}),
+            message: __('{{ module }}::messages.{{ entitySnake }}.fetched')
+        );
+    }
+
+    public function restore(int $id): JsonResponse
+    {
+        ${{ entityCamel }} = $this->restore{{ entity }}UseCase->execute($id);
+
+        return $this->successResponse(
+            data: new {{ entity }}Resource(resource: ${{ entityCamel }}),
+            message: __('{{ module }}::messages.{{ entitySnake }}.restored')
+        );
+    }
+
+    public function update(Update{{ entity }}Request $update{{ entity }}Request, int $id): JsonResponse
+    {
+        ${{ entityCamel }}Data = {{ entity }}Data::fromArray($update{{ entity }}Request->validated());
+        ${{ entityCamel }} = $this->update{{ entity }}UseCase->execute(id: $id, {{ entityCamel }}Data: ${{ entityCamel }}Data);
+
+        return $this->successResponse(
+            data: new {{ entity }}Resource(resource: ${{ entityCamel }}),
+            message: __('{{ module }}::messages.{{ entitySnake }}.updated')
+        );
+    }
+
+    public function destroy(int $id): JsonResponse
+    {
+        $this->delete{{ entity }}UseCase->execute(id: $id);
+
+        return $this->successResponse(
+            data: null,
+            message: __('{{ module }}::messages.{{ entitySnake }}.deleted')
+        );
+    }
+
+    public function forceDelete(int $id): JsonResponse
+    {
+        $this->forceDelete{{ entity }}UseCase->execute($id);
+
+        return $this->successResponse(
+            data: null,
+            message: __('{{ module }}::messages.{{ entitySnake }}.force_deleted')
+        );
+    }
+
+    public function bulkDelete(BulkDelete{{ entityPlural }}Request $bulkDelete{{ entityPlural }}Request): JsonResponse
+    {
+        $result = $this->bulkDelete{{ entityPlural }}UseCase->execute($bulkDelete{{ entityPlural }}Request->validated('ids'));
+
+        $message = __('{{ module }}::messages.{{ entitySnakePlural }}.bulk_deleted');
+        if ($result['skipped']) {
+            $message .= ' ' . __('{{ module }}::messages.{{ entitySnakePlural }}.bulk_skipped');
+        }
+
+        return $this->successResponse(
+            data: $result,
+            message: $message
+        );
+    }
+}

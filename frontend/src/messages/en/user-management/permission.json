@@ -1,0 +1,59 @@
+{
+  "config": {
+    "title": "Permissions",
+    "entity": "Permission",
+    "table": {
+      "add": "Add Permission",
+      "create": "Create Permission",
+      "edit": "Edit Permission",
+      "update": "Update Permission",
+      "displayName": "Display Name"
+    },
+    "form": {
+      "name": {
+        "label": "Name",
+        "validation": {
+          "required": "Name is required",
+          "maxLength": "Name must be 255 characters or less"
+        }
+      },
+      "displayNameEn": {
+        "label": "Display Name English",
+        "validation": {
+          "maxLength": "Display Name English must be 255 characters or less"
+        }
+      },
+      "displayNamePs": {
+        "label": "Display Name Pashto",
+        "validation": {
+          "maxLength": "Display Name Pashto must be 255 characters or less"
+        }
+      },
+      "displayNameDr": {
+        "label": "Display Name Dari",
+        "validation": {
+          "maxLength": "Display Name Dari must be 255 characters or less"
+        }
+      },
+      "guardName": {
+        "label": "Guard Name",
+        "validation": {
+          "maxLength": "Guard Name must be 255 characters or less"
+        }
+      }
+    },
+    "repository": {
+      "createFailed": "Failed to create Permission",
+      "fetchFailed": "Failed to fetch Permission",
+      "updateFailed": "Failed to update Permission",
+      "deleteFailed": "Failed to delete Permission",
+      "fetchManyFailed": "Failed to fetch Permissions",
+      "fetchManySuccess": "Permissions fetched successfully"
+    },
+    "presentation": {
+      "createSuccess": "Permission created successfully",
+      "updateSuccess": "Permission updated successfully",
+      "deleteSuccess": "Permission deleted successfully"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Modules\{{ module }}\Application\DTOs;
+
+use App\Modules\Common\Infrastructure\Traits\IdCaster;
+
+final readonly class {{ entity }}Data
+{
+    use IdCaster;
+
+    public function __construct(
+        {{ properties }}
+    ) {}
+
+    public static function fromArray(array $data): self
+    {
+        $ids = self::castIds([{{ cast_ids }}], $data);
+
+        return new self(
+            {{ assignments }}
+        );
+    }
+
+    public function toArray(): array
+    {
+        return [
+            {{ to_array }}
+        ];
+    }
+}

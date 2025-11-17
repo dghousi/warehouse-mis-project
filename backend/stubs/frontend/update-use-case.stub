@@ -1,0 +1,14 @@
+import { type {entity} } from '@/modules/{moduleKebab}/domain/entities/{entity}';
+import { type {entity}RepositoryInterface } from '@/modules/{moduleKebab}/domain/interfaces/{entity}RepositoryInterface';
+import { type ApiResponse } from '@/types/ApiResponse';
+
+export class Update{entity}UseCase {
+  constructor(private readonly {entityCamel}Repository: {entity}RepositoryInterface) {}
+
+  async execute(
+    id: string | number,
+    {entityCamel}: Partial<Omit<{entity}, 'id' | 'createdAt' | 'updatedAt'>>
+  ): Promise<ApiResponse<{entity}>> {
+    return await this.{entityCamel}Repository.update{entity}(id, {entityCamel});
+  }
+}

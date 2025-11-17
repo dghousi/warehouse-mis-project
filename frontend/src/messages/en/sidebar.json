@@ -1,0 +1,22 @@
+{
+  "platform": "Platform",
+  "name": "CPAMIS",
+  "userManagement": {
+    "title": "User Management",
+    "users": "Users",
+    "roles": "Roles",
+    "permissions": "Permissions"
+  },
+  "documentation": {
+    "title": "Documentation",
+    "users": "Users",
+    "permissions": "Permissions",
+    "settings": "Settings"
+  },
+  "navUser": {
+    "loggingOut": "Logging Out...",
+    "logout": "Logout",
+    "account": "Account",
+    "notifications": "Notifications"
+  }
+}

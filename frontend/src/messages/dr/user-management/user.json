@@ -1,0 +1,184 @@
+{
+  "config": {
+    "title": "کاربر ها",
+    "entity": "کاربر",
+    "table": {
+      "add": "افزودن کاربر",
+      "create": "ایجاد کاربر",
+      "edit": "ویرایش کاربر",
+      "update": "به‌روزرسانی کاربر",
+      "personalInfo": "اطلاعات شخصی",
+      "jobTitle/organization": "عنوان شغلی / سازمان",
+      "contactInfo": "اطلاعات تماس",
+      "reportTo": "Report To"
+    },
+    "form": {
+      "firstName": {
+        "label": "نام کوچک",
+        "validation": {
+          "required": "نام کوچک الزامی است",
+          "maxLength": "نام کوچک باید ۲۵۵ کاراکتر یا کمتر باشد"
+        }
+      },
+      "lastName": {
+        "label": "نام خانوادگی",
+        "validation": {
+          "maxLength": "نام خانوادگی باید ۲۵۵ کاراکتر یا کمتر باشد"
+        }
+      },
+      "attachment": {
+        "label": "ضمیمه",
+        "validation": {
+          "mimes": "ضمیمه باید تصویر معتبر باشد (jpg, jpeg, png)",
+          "maxSize": "ضمیمه باید کمتر از ۵ مگابایت باشد"
+        }
+      },
+      "jobTitle": {
+        "label": "عنوان شغلی",
+        "validation": {
+          "required": "عنوان شغلی الزامی است",
+          "maxLength": "عنوان شغلی باید ۲۵۵ کاراکتر یا کمتر باشد"
+        }
+      },
+      "reportToId": {
+        "label": "شناسه گزارش به",
+        "validation": {
+          "pattern": "شناسه گزارش به باید عدد باشد"
+        }
+      },
+      "email": {
+        "label": "ایمیل",
+        "validation": {
+          "required": "ایمیل الزامی است",
+          "email": "فرمت ایمیل نامعتبر است",
+          "maxLength": "ایمیل باید ۲۵۵ کاراکتر یا کمتر باشد"
+        }
+      },
+      "emailVerifiedAt": {
+        "label": "ایمیل تأیید شده در"
+      },
+      "contactNumber": {
+        "label": "شماره تماس",
+        "validation": {
+          "maxLength": "شماره تماس باید ۲۵۵ کاراکتر یا کمتر باشد"
+        }
+      },
+      "whatsappNumber": {
+        "label": "شماره واتساپ",
+        "validation": {
+          "maxLength": "شماره واتساپ باید ۲۵۵ کاراکتر یا کمتر باشد"
+        }
+      },
+      "password": {
+        "label": "گذرواژه",
+        "validation": {
+          "required": "گذرواژه الزامی است",
+          "minLength": "گذرواژه باید حداقل ۸ کاراکتر باشد",
+          "maxLength": "گذرواژه باید ۲۵۵ کاراکتر یا کمتر باشد"
+        }
+      },
+      "locale": {
+        "label": "زبان",
+        "validation": {
+          "in": "زبان باید یکی از مقادیر مجاز باشد"
+        },
+        "options": {
+          "en": "انگلیسی",
+          "dr": "دری",
+          "ps": "پشتو"
+        }
+      },
+      "mainOrganizationId": {
+        "label": "شناسه سازمان اصلی",
+        "validation": {
+          "pattern": "شناسه سازمان اصلی باید عدد باشد"
+        }
+      },
+      "rights": {
+        "label": "حقوق",
+        "validation": {
+          "in": "حقوق باید یکی از مقادیر مجاز باشد"
+        },
+        "options": {
+          "create": "ایجاد",
+          "review": "بررسی",
+          "approval": "تأیید"
+        }
+      },
+      "notifications": {
+        "label": "اطلاع‌رسانی"
+      },
+      "enabled": {
+        "label": "فعال است",
+        "options": {
+          "active": "فعال",
+          "inactive": "غیرفعال"
+        }
+      },
+      "status": {
+        "label": "وضعیت",
+        "validation": {
+          "in": "وضعیت باید یکی از مقادیر مجاز باشد"
+        },
+        "options": {
+          "pending": "در انتظار",
+          "approved": "تأیید شده",
+          "rejected": "رد شده",
+          "uploadForm": "آپلود فرم"
+        }
+      },
+      "remarks": {
+        "label": "یادداشت‌ها",
+        "validation": {
+          "maxLength": "یادداشت‌ها باید ۲۵۵ کاراکتر یا کمتر باشد"
+        }
+      },
+      "lastLoginAt": {
+        "label": "آخرین ورود در"
+      },
+      "userForm": {
+        "label": "فرم کاربر",
+        "validation": {
+          "maxLength": "فرم کاربر باید ۲۵۵ کاراکتر یا کمتر باشد"
+        }
+      },
+      "createdBy": {
+        "label": "ایجاد شده توسط",
+        "validation": {
+          "pattern": "ایجاد شده توسط باید عدد باشد"
+        }
+      },
+      "updatedBy": {
+        "label": "به‌روزرسانی شده توسط",
+        "validation": {
+          "pattern": "به‌روزرسانی شده توسط باید عدد باشد"
+        }
+      },
+      "roles": {
+        "label": "نقش‌ها",
+        "validation": {
+          "maxLength": "نقش‌ها باید ۲۵۵ کاراکتر یا کمتر باشد"
+        }
+      },
+      "permissions": {
+        "label": "مجوزها",
+        "validation": {
+          "maxLength": "مجوزها باید ۲۵۵ کاراکتر یا کمتر باشد"
+        }
+      }
+    },
+    "repository": {
+      "createFailed": "ایجاد کاربر موفق نشد",
+      "fetchFailed": "بازیابی کاربر موفق نشد",
+      "updateFailed": "به‌روزرسانی کاربر موفق نشد",
+      "deleteFailed": "حذف کاربر موفق نشد",
+      "fetchManyFailed": "بازیابی کاربران موفق نشد",
+      "fetchManySuccess": "کاربران با موفقیت بازیابی شدند"
+    },
+    "presentation": {
+      "createSuccess": "User created successfully",
+      "updateSuccess": "User updated successfully",
+      "deleteSuccess": "User deleted successfully"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+/* eslint-disable */  // NOSONAR
+export { useCreate{entity} } from './{entityKebabPlural}/useCreate{entity}';
+export { useDelete{entity} } from './{entityKebabPlural}/useDelete{entity}';
+export { useGet{entity} } from './{entityKebabPlural}/useGet{entity}';
+export { use{entity}List } from './{entityKebabPlural}/use{entity}List';
+export { useUpdate{entity} } from './{entityKebabPlural}/useUpdate{entity}';

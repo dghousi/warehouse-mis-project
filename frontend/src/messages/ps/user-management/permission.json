@@ -1,0 +1,59 @@
+{
+  "config": {
+    "title": "صلاحیت ها",
+    "entity": "صلاحیت",
+    "table": {
+      "add": "صلاحیت اضافه کړئ",
+      "create": "صلاحیت جوړ کړئ",
+      "edit": "صلاحیت سمول",
+      "update": "صلاحیت تازه کړئ",
+      "displayName": "Display Name"
+    },
+    "form": {
+      "name": {
+        "label": "نوم",
+        "validation": {
+          "required": "نوم اړین دی",
+          "maxLength": "نوم باید ۲۵۵ توری یا لږ وي"
+        }
+      },
+      "displayNameEn": {
+        "label": "انګلیسي ښودونکی نوم",
+        "validation": {
+          "maxLength": "انګلیسي ښودونکی نوم باید ۲۵۵ توری یا لږ وي"
+        }
+      },
+      "displayNamePs": {
+        "label": "پښتو ښودونکی نوم",
+        "validation": {
+          "maxLength": "پښتو ښودونکی نوم باید ۲۵۵ توری یا لږ وي"
+        }
+      },
+      "displayNameDr": {
+        "label": "دري ښودونکی نوم",
+        "validation": {
+          "maxLength": "دري ښودونکی نوم باید ۲۵۵ توری یا لږ وي"
+        }
+      },
+      "guardName": {
+        "label": "ساتونکي نوم",
+        "validation": {
+          "maxLength": "ساتونکي نوم باید ۲۵۵ توری یا لږ وي"
+        }
+      }
+    },
+    "repository": {
+      "createFailed": "د صلاحیت جوړول ناکامه شول",
+      "fetchFailed": "د صلاحیت ترلاسه کول ناکام شول",
+      "updateFailed": "د صلاحیت تازه کول ناکام شول",
+      "deleteFailed": "د صلاحیت ړنګول ناکام شول",
+      "fetchManyFailed": "د څو صلاحیتونو ترلاسه کول ناکام شول",
+      "fetchManySuccess": "صلاحیتونه په بریالیتوب ترلاسه شول"
+    },
+    "presentation": {
+      "createSuccess": "Permission created successfully",
+      "updateSuccess": "Permission updated successfully",
+      "deleteSuccess": "Permission deleted successfully"
+    }
+  }
+}

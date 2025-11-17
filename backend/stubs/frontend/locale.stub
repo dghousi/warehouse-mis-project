@@ -1,0 +1,18 @@
+{
+  "config": {
+    "title":"{entityHeadLinePlural}",
+    "entity":"{entityHeadLine}",
+    "table": {
+      {table}
+    },
+    "form": {
+      {fields}
+    },
+    "repository": {
+      {repository}
+    },
+    "presentation": {
+      {presentation}
+    }
+  }
+}

@@ -1,0 +1,25 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Modules\{{ module }}\Infrastructure\Http\Requests\{{ entity }};
+
+use App\Modules\Common\Infrastructure\Http\Requests\BaseFormRequest;
+use Illuminate\Validation\Rule;
+
+final class Update{{ entity }}Request extends BaseFormRequest
+{
+    protected array $booleanFields = [{{ boolean_fields }}];
+
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    public function rules(): array
+    {
+        return [
+            {{ update_rules }}
+        ];
+    }
+}

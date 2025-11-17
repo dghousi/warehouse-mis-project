@@ -1,0 +1,19 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Modules\{{ module }}\Application\UseCases\{{ entity }};
+
+use App\Modules\{{ module }}\Domain\Entities\{{ entity }};
+use App\Modules\{{ module }}\Application\DTOs\{{ entity }}Data;
+use App\Modules\{{ module }}\Domain\Services\{{ entity }}Service;
+
+final readonly class Update{{ entity }}UseCase
+{
+    public function __construct(private {{ entity }}Service ${{ entityCamel }}Service) {}
+
+    public function execute(int $id, {{ entity }}Data ${{ entityCamel }}Data): {{ entity }}
+    {
+        return $this->{{ entityCamel }}Service->update{{ entity }}(id: $id, data: ${{ entityCamel }}Data->toArray());
+    }
+}
