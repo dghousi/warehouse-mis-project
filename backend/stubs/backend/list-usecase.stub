@@ -1,0 +1,19 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Modules\{{ module }}\Application\UseCases\{{ entity }};
+
+use App\Modules\Common\Application\DTOs\QuerySpecification;
+use App\Modules\{{ module }}\Domain\Services\{{ entity }}Service;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+
+final readonly class List{{ entityPlural }}UseCase
+{
+    public function __construct(private {{ entity }}Service ${{ entityCamel }}Service) {}
+
+    public function execute(QuerySpecification $querySpecification): LengthAwarePaginator
+    {
+        return $this->{{ entityCamel }}Service->list{{ entityPlural }}($querySpecification);
+    }
+}

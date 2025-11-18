@@ -1,0 +1,31 @@
+import { type Permission } from './Permission';
+
+export type User = {
+  id: string | number;
+  firstName: string;
+  lastName: string;
+  profilePhotoPath: string;
+  jobTitle: string;
+  reportToId: string;
+  reportTo: any;
+  email: string;
+  emailVerifiedAt: string;
+  contactNumber: string;
+  whatsappNumber: string;
+  password: string;
+  locale: string;
+  mainOrganizationId: string;
+  rights: string;
+  notifications: boolean;
+  enabled: boolean;
+  status: string;
+  remarks: string;
+  lastLoginAt: string;
+  userFormPath: string;
+  createdBy: string;
+  updatedBy: string;
+  roles: string[];
+  permissions: Permission[];
+  createdAt: string;
+  updatedAt: string;
+};

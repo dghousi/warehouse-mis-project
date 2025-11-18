@@ -1,0 +1,27 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Modules\{{ module }}\Infrastructure\Providers;
+
+use App\Modules\{{ module }}\Domain\Repositories\{{ entity }}RepositoryInterface;
+use App\Modules\{{ module }}\Infrastructure\Repositories\Eloquent{{ entity }}Repository;
+use Illuminate\Support\ServiceProvider;
+
+final class {{ module }}ServiceProvider extends ServiceProvider
+{
+    public function register(): void
+    {
+        $this->registerBindings();
+    }
+
+    public function boot(): void
+    {
+        $this->loadRoutesFrom(path: modulePath(module: '{{ module }}', path: 'Routes/api.php'));
+    }
+
+    protected function registerBindings(): void
+    {
+        $this->app->bind(abstract: {{ entity }}RepositoryInterface::class, concrete: Eloquent{{ entity }}Repository::class);
+    }
+}

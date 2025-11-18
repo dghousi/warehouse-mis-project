@@ -1,0 +1,22 @@
+{
+  "platform": "پلاټفارم",
+  "name": "CPAMIS",
+  "userManagement": {
+    "title": "د کاروونکو مدیریت",
+    "users": "کاروونکي",
+    "roles": "رولونه",
+    "permissions": "اجازې"
+  },
+  "documentation": {
+    "title": "لاسوندونه",
+    "users": "کاروونکي",
+    "permissions": "اجازې",
+    "settings": "تنظیمات"
+  },
+  "navUser": {
+    "loggingOut": "په وتلو کې...",
+    "logout": "وتل",
+    "account": "Account",
+    "notifications": "Notifications"
+  }
+}

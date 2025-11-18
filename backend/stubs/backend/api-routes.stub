@@ -1,0 +1,13 @@
+<?php
+
+declare(strict_types=1);
+
+use App\Modules\{{ module }}\Infrastructure\Http\Controllers\{{ entity }}Controller;
+use Illuminate\Support\Facades\Route;
+
+Route::middleware(['api', 'auth:sanctum', 'set_locale'])->prefix('api/v1/{{ moduleSnake }}')->group(function (): void {
+    Route::post('/{{ entityKebabPlural }}/restore/{id}', [{{ entity }}Controller::class, 'restore']);
+    Route::delete('/{{ entityKebabPlural }}/force/{id}', [{{ entity }}Controller::class, 'forceDelete']);
+    Route::delete('/{{ entityKebabPlural }}/bulk', [{{ entity }}Controller::class, 'bulkDelete']);
+    Route::apiResource('{{ entityKebabPlural }}', {{ entity }}Controller::class);
+});

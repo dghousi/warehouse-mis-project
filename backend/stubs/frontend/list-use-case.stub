@@ -1,0 +1,26 @@
+import { type {entity} } from '@/modules/{moduleKebab}/domain/entities/{entity}';
+import { type {entity}RepositoryInterface} from '@/modules/{moduleKebab}/domain/interfaces/{entity}RepositoryInterface';
+import { type ApiResponse, type PaginatedApiResponse } from '@/types/ApiResponse';
+
+export class List{entityPlural}UseCase {
+  constructor(private readonly {entityCamel}Repository: {entity}RepositoryInterface) {}
+
+  async execute(
+    search: string = '',
+    searchFields: string[] = [],
+    relations: string[] = [],
+    filters: Record<string, string[]> = {},
+    page: number = 1,
+    perPage: number = 10
+  ): Promise<ApiResponse<PaginatedApiResponse<{entity}[]>>> {
+    const relationsArray = Array.isArray(relations) ? relations : [];
+    return this.{entityCamel}Repository.paginate(
+      search,
+      searchFields,
+      relationsArray,
+      filters,
+      page,
+      perPage
+    );
+  }
+}

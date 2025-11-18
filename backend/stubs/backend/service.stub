@@ -1,0 +1,84 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Modules\{{ module }}\Domain\Services;
+
+use App\Modules\Common\Application\DTOs\QuerySpecification;
+use App\Modules\{{ module }}\Domain\Entities\{{ entity }};
+use App\Modules\{{ module }}\Domain\Repositories\{{ entity }}RepositoryInterface;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+
+final readonly class {{ entity }}Service
+{
+    public function __construct(private {{ entity }}RepositoryInterface ${{ entityCamel }}Repository) {}
+
+    public function list{{ entityPlural }}(QuerySpecification $querySpecification): LengthAwarePaginator
+    {
+        return $this->{{ entityCamel }}Repository->paginate($querySpecification);
+    }
+
+    public function get{{ entity }}(int $id): {{ entity }}
+    {
+        return $this->{{ entityCamel }}Repository->find(id: $id);
+    }
+
+    public function restore{{ entity }}(int $id): {{ entity }}
+    {
+        return tap(
+            $this->{{ entityCamel }}Repository->restore($id),
+            fn () => $this->{{ entityCamel }}Repository->invalidateCache()
+        );
+    }
+
+    public function create{{ entity }}(array $data): {{ entity }}
+    {
+        return tap(
+            $this->{{ entityCamel }}Repository->create(data: $data),
+            fn () => $this->{{ entityCamel }}Repository->invalidateCache()
+        );
+    }
+
+    public function update{{ entity }}(int $id, array $data): {{ entity }}
+    {
+        return tap(
+            $this->{{ entityCamel }}Repository->update(id: $id, data: $data),
+            fn () => $this->{{ entityCamel }}Repository->invalidateCache()
+        );
+    }
+
+    public function delete{{ entity }}(int $id): void
+    {
+        $this->{{ entityCamel }}Repository->delete(id: $id);
+        $this->{{ entityCamel }}Repository->invalidateCache();
+    }
+
+    public function forceDelete{{ entity }}(int $id): void
+    {
+        $permission = $this->{{ entityCamel }}Repository->findTrashed($id) ?? $this->{{ entityCamel }}Repository->find($id);
+        $this->{{ entityCamel }}Repository->forceDelete($permission->id);
+        $this->{{ entityCamel }}Repository->invalidateCache();
+    }
+
+    public function bulkDelete{{ entityPlural }}(array $ids): array
+    {
+        $deleted = [];
+        $skipped = [];
+
+        foreach ($ids as $id) {
+            ${{ entityCamel }} = $this->{{ entityCamel }}Repository->find($id);
+
+            if (method_exists(${{ entityCamel }}, 'hasRelatedRecords') && ${{ entityCamel }}->hasRelatedRecords()) {
+                $skipped[] = $id;
+                continue;
+            }
+
+            $this->{{ entityCamel }}Repository->delete(id: $id);
+            $deleted[] = $id;
+        }
+
+        $this->{{ entityCamel }}Repository->invalidateCache();
+
+        return ['deleted' => $deleted, 'skipped' => $skipped];
+    }
+}

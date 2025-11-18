@@ -1,0 +1,86 @@
+import { useMutation, UseMutationResult, useQueryClient } from '@tanstack/react-query';
+
+import { Delete{entity}UseCase } from '@/modules/{moduleKebab}/application/use-cases/{entityKebabPlural}/delete-{entityKebab}-use-case';
+import { type {entity} } from '../../../domain/entities/{entity}';
+import { {entity}Repository } from '@/modules/{moduleKebab}/infrastructure/repositories/{entityKebab}-repository';
+import { type ApiResponse, type PaginatedApiResponse } from '@/types/ApiResponse';
+
+import { {entityCamel}Config } from '../../config/{entityKebab}-config';
+
+type Delete{entity}MutationContext = {
+  previous{entityPlural}: [string[], ApiResponse<PaginatedApiResponse<{entity}[]>> | undefined][];
+  previous{entity}?: ApiResponse<{entity}>;
+};
+
+export const useDelete{entity} = (): UseMutationResult<
+  ApiResponse<null>,
+  Error,
+  string | number,
+  Delete{entity}MutationContext
+> => {
+  const queryClient = useQueryClient();
+  
+  return useMutation<ApiResponse<null>, Error, string | number, Delete{entity}MutationContext>({
+    mutationFn: (id) => {
+      const {entityCamel}Repository = new {entity}Repository();
+      const delete{entity}UseCase = new Delete{entity}UseCase({entityCamel}Repository);
+      return delete{entity}UseCase.execute(id);
+    },
+    mutationKey: [{entityCamel}Config.queryKey, 'delete'],
+    onError: (_, id, context) => {
+      if (context?.previous{entityPlural}) {
+        for (const [queryKey, data] of context.previous{entityPlural}) {
+          queryClient.setQueryData(queryKey, data);
+        }
+      }
+      if (context?.previous{entity}) {
+        queryClient.setQueryData([{entityCamel}Config.singleQueryKey, id], context.previous{entity});
+      }
+    },
+    onMutate: async (id) => {
+      const listQueryKey = [{entityCamel}Config.queryKey];
+      const singleQueryKey = [{entityCamel}Config.singleQueryKey, id];
+      await queryClient.cancelQueries({ queryKey: listQueryKey });
+      await queryClient.cancelQueries({ queryKey: singleQueryKey });
+
+      const previous{entityPlural} = queryClient.getQueriesData<ApiResponse<PaginatedApiResponse<{entity}[]>>>({
+        queryKey: listQueryKey,
+      }) as [string[], ApiResponse<PaginatedApiResponse<{entity}[]>> | undefined][];
+
+      const previous{entity} = queryClient.getQueryData<ApiResponse<{entity}>>(singleQueryKey);
+
+      queryClient.setQueriesData<ApiResponse<PaginatedApiResponse<{entity}[]>>>(
+        { queryKey: listQueryKey },
+        (old) => {
+          if (!old?.data?.data) return old;
+          return {
+            ...old,
+            data: {
+              ...old.data,
+              data: old.data.data.filter((item) => item.id !== id),
+              meta: {
+                ...old.data.meta,
+                to: old.data.meta.to - 1,
+                total: old.data.meta.total - 1,
+              },
+            },
+          };
+        }
+      );
+
+      queryClient.removeQueries({ queryKey: singleQueryKey });
+
+      return { previous{entity}, previous{entityPlural} };
+    },
+    onSettled: (_, __, id) => {
+      queryClient.invalidateQueries({
+        exact: false,
+        queryKey: [{entityCamel}Config.queryKey],
+      });
+      queryClient.invalidateQueries({
+        exact: true,
+        queryKey: [{entityCamel}Config.singleQueryKey, id],
+      });
+    },
+  });
+};

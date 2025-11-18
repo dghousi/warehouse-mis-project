@@ -1,0 +1,30 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Modules\{{ module }}\Domain\Repositories;
+
+use App\Modules\Common\Application\DTOs\QuerySpecification;
+use App\Modules\{{ module }}\Domain\Entities\{{ entity }};
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+
+interface {{ entity }}RepositoryInterface
+{
+    public function paginate(QuerySpecification $querySpecification): LengthAwarePaginator;
+
+    public function find(int $id): {{ entity }};
+
+    public function findTrashed(int $id): ?{{ entity }};
+
+    public function create(array $data): {{ entity }};
+
+    public function update(int $id, array $data): {{ entity }};
+
+    public function delete(int $id): void;
+
+    public function forceDelete(int $id): void;
+
+    public function restore(int $id): {{ entity }};
+
+    public function invalidateCache(): void;
+}

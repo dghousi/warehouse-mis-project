@@ -1,0 +1,60 @@
+{
+  "config": {
+    "title": "نقش ها",
+    "entity": "نقش",
+    "table": {
+      "add": "نقش اضافه کړئ",
+      "create": "نقش جوړ کړئ",
+      "edit": "نقش سم کړئ",
+      "update": "نقش تازه کړئ",
+      "displayName": "Display Name",
+      "permissions": "Permissions"
+    },
+    "form": {
+      "name": {
+        "label": "نوم",
+        "validation": {
+          "required": "نوم اړین دی",
+          "maxLength": "نوم باید ۲۵۵ توري یا لږ وي"
+        }
+      },
+      "displayNameEn": {
+        "label": "انګلیسي ښودل شوی نوم",
+        "validation": {
+          "maxLength": "انګلیسي ښودل شوی نوم باید ۲۵۵ توري یا لږ وي"
+        }
+      },
+      "displayNamePs": {
+        "label": "پښتو ښودل شوی نوم",
+        "validation": {
+          "maxLength": "پښتو ښودل شوی نوم باید ۲۵۵ توري یا لږ وي"
+        }
+      },
+      "displayNameDr": {
+        "label": "دري ښودل شوی نوم",
+        "validation": {
+          "maxLength": "دري ښودل شوی نوم باید ۲۵۵ توري یا لږ وي"
+        }
+      },
+      "guardName": {
+        "label": "ساتونکي نوم",
+        "validation": {
+          "maxLength": "ساتونکي نوم باید ۲۵۵ توري یا لږ وي"
+        }
+      }
+    },
+    "repository": {
+      "createFailed": "د نقش جوړول بریالي نشول",
+      "fetchFailed": "نقش ترلاسه نشو",
+      "updateFailed": "د نقش تازه کول بریالي نشول",
+      "deleteFailed": "نقش حذف نشو",
+      "fetchManyFailed": "نقشونه ترلاسه نشول",
+      "fetchManySuccess": "نقشونه بریالي ترلاسه شول"
+    },
+    "presentation": {
+      "createSuccess": "Role created successfully",
+      "updateSuccess": "Role updated successfully",
+      "deleteSuccess": "Role deleted successfully"
+    }
+  }
+}

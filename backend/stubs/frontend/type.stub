@@ -1,0 +1,6 @@
+export type {entity} = {
+  id: number;
+{fieldDefinitions}
+  createdAt: string;
+  updatedAt: string;
+};

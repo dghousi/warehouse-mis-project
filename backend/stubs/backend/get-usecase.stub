@@ -1,0 +1,18 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Modules\{{ module }}\Application\UseCases\{{ entity }};
+
+use App\Modules\{{ module }}\Domain\Entities\{{ entity }};
+use App\Modules\{{ module }}\Domain\Services\{{ entity }}Service;
+
+final readonly class Get{{ entity }}UseCase
+{
+    public function __construct(private {{ entity }}Service ${{ entityCamel }}Service) {}
+
+    public function execute(int $id): {{ entity }}
+    {
+        return $this->{{ entityCamel }}Service->get{{ entity }}(id: $id);
+    }
+}

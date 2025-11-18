@@ -1,0 +1,184 @@
+{
+  "config": {
+    "title": "Users",
+    "entity": "User",
+    "table": {
+      "add": "Add User",
+      "create": "Create User",
+      "edit": "Edit User",
+      "update": "Update User",
+      "personalInfo": "Personal Info",
+      "jobTitle/organization": "JobTitle / Organization",
+      "contactInfo": "Contact Info",
+      "reportTo": "Report To"
+    },
+    "form": {
+      "firstName": {
+        "label": "First Name",
+        "validation": {
+          "required": "First Name is required",
+          "maxLength": "First Name must be 255 characters or less"
+        }
+      },
+      "lastName": {
+        "label": "Last Name",
+        "validation": {
+          "maxLength": "Last Name must be 255 characters or less"
+        }
+      },
+      "profilePhotoPath": {
+        "label": "Profile Photo",
+        "validation": {
+          "mimes": "Profile Photo must be a valid image (jpg, jpeg, png)",
+          "maxSize": "Profile Photo must be less than 5MB"
+        }
+      },
+      "jobTitle": {
+        "label": "Job Title",
+        "validation": {
+          "required": "Job Title is required",
+          "maxLength": "Job Title must be 255 characters or less"
+        }
+      },
+      "reportToId": {
+        "label": "Report To Id",
+        "validation": {
+          "pattern": "Report To Id must be a number"
+        }
+      },
+      "email": {
+        "label": "Email",
+        "validation": {
+          "required": "Email is required",
+          "email": "Invalid email format",
+          "maxLength": "Email must be 255 characters or less"
+        }
+      },
+      "emailVerifiedAt": {
+        "label": "Email Verified At"
+      },
+      "contactNumber": {
+        "label": "Contact Number",
+        "validation": {
+          "maxLength": "Contact Number must be 255 characters or less"
+        }
+      },
+      "whatsappNumber": {
+        "label": "Whatsapp Number",
+        "validation": {
+          "maxLength": "Whatsapp Number must be 255 characters or less"
+        }
+      },
+      "password": {
+        "label": "Password",
+        "validation": {
+          "required": "Password is required",
+          "minLength": "Password must be at least 8 characters",
+          "maxLength": "Password must be 255 characters or less"
+        }
+      },
+      "locale": {
+        "label": "Locale",
+        "validation": {
+          "in": "Locale must be one of the allowed values"
+        },
+        "options": {
+          "en": "English",
+          "dr": "Dari",
+          "ps": "Pashto"
+        }
+      },
+      "mainOrganizationId": {
+        "label": "Main Organization Id",
+        "validation": {
+          "pattern": "Main Organization Id must be a number"
+        }
+      },
+      "rights": {
+        "label": "Rights",
+        "validation": {
+          "in": "Rights must be one of the allowed values"
+        },
+        "options": {
+          "create": "Create",
+          "review": "Review",
+          "approval": "Approval"
+        }
+      },
+      "notifications": {
+        "label": "Notifications"
+      },
+      "enabled": {
+        "label": "Enabled",
+        "options": {
+          "active": "Active",
+          "inactive": "Inactive"
+        }
+      },
+      "status": {
+        "label": "Status",
+        "validation": {
+          "in": "Status must be one of the allowed values"
+        },
+        "options": {
+          "pending": "Pending",
+          "approved": "Approved",
+          "rejected": "Rejected",
+          "uploadForm": "UploadForm"
+        }
+      },
+      "remarks": {
+        "label": "Remarks",
+        "validation": {
+          "maxLength": "Remarks must be 255 characters or less"
+        }
+      },
+      "lastLoginAt": {
+        "label": "Last Login At"
+      },
+      "userFormPath": {
+        "label": "User Form",
+        "validation": {
+          "maxLength": "User Form must be 255 characters or less"
+        }
+      },
+      "createdBy": {
+        "label": "Created By",
+        "validation": {
+          "pattern": "Created By must be a number"
+        }
+      },
+      "updatedBy": {
+        "label": "Updated By",
+        "validation": {
+          "pattern": "Updated By must be a number"
+        }
+      },
+      "roles": {
+        "label": "Roles",
+        "validation": {
+          "maxLength": "Roles must be 255 characters or less"
+        }
+      },
+      "permissions": {
+        "label": "Permissions",
+        "validation": {
+          "maxLength": "Permissions must be 255 characters or less"
+        }
+      }
+    },
+    "repository": {
+      "createFailed": "Failed to create User",
+      "fetchFailed": "Failed to fetch User",
+      "updateFailed": "Failed to update User",
+      "deleteFailed": "Failed to delete User",
+      "fetchManyFailed": "Failed to fetch Users",
+      "fetchManySuccess": "Users fetched successfully"
+    },
+    "presentation": {
+      "createSuccess": "User created successfully",
+      "updateSuccess": "User updated successfully",
+      "deleteSuccess": "User deleted successfully"
+    }
+  }
+}

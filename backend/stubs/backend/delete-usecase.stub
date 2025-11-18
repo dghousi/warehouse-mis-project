@@ -1,0 +1,17 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Modules\{{ module }}\Application\UseCases\{{ entity }};
+
+use App\Modules\{{ module }}\Domain\Services\{{ entity }}Service;
+
+final readonly class Delete{{ entity }}UseCase
+{
+    public function __construct(private {{ entity }}Service ${{ entityCamel }}Service) {}
+
+    public function execute(int $id): void
+    {
+        $this->{{ entityCamel }}Service->delete{{ entity }}(id: $id);
+    }
+}

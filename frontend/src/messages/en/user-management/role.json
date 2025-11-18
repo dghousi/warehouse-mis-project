@@ -1,0 +1,60 @@
+{
+  "config": {
+    "title": "Roles",
+    "entity": "Role",
+    "table": {
+      "add": "Add Role",
+      "create": "Create Role",
+      "edit": "Edit Role",
+      "update": "Update Role",
+      "displayName": "Display Name",
+      "permissions": "Permissions"
+    },
+    "form": {
+      "name": {
+        "label": "Name",
+        "validation": {
+          "required": "Name is required",
+          "maxLength": "Name must be 255 characters or less"
+        }
+      },
+      "displayNameEn": {
+        "label": "Display Name English",
+        "validation": {
+          "maxLength": "Display Name English must be 255 characters or less"
+        }
+      },
+      "displayNamePs": {
+        "label": "Display Name Pashto",
+        "validation": {
+          "maxLength": "Display Name Pashto must be 255 characters or less"
+        }
+      },
+      "displayNameDr": {
+        "label": "Display Name Dari",
+        "validation": {
+          "maxLength": "Display Name Dari must be 255 characters or less"
+        }
+      },
+      "guardName": {
+        "label": "Guard Name",
+        "validation": {
+          "maxLength": "Guard Name must be 255 characters or less"
+        }
+      }
+    },
+    "repository": {
+      "createFailed": "Failed to create Role",
+      "fetchFailed": "Failed to fetch Role",
+      "updateFailed": "Failed to update Role",
+      "deleteFailed": "Failed to delete Role",
+      "fetchManyFailed": "Failed to fetch Roles",
+      "fetchManySuccess": "Roles fetched successfully"
+    },
+    "presentation": {
+      "createSuccess": "Role created successfully",
+      "updateSuccess": "Role updated successfully",
+      "deleteSuccess": "Role deleted successfully"
+    }
+  }
+}

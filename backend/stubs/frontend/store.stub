@@ -1,0 +1,29 @@
+import { create } from 'zustand';
+
+import { type PaginationMeta } from '@/types/ApiResponse';
+
+import { type {entity} } from '../../domain/entities/{entity}';
+
+type {entity}State = {
+  {entityCamelPlural}: {entity}[];
+  pagination: PaginationMeta | null;
+  selected{entity}: {entity} | null;
+  set{entityPlural}: ({entityCamelPlural}: {entity}[], pagination: PaginationMeta) => void;
+  setSelected{entity}: ({entityCamel}: {entity} | null) => void;
+  clear{entityPlural}: () => void;
+};
+
+export const use{entity}Store = create<{entity}State>((set) => ({
+  clear{entityPlural}: () => {
+    set({ pagination: null, selected{entity}: null, {entityCamelPlural}: [] });
+  },
+  pagination: null,
+  {entityCamelPlural}: [],
+  selected{entity}: null,
+  set{entityPlural}: ({entityCamelPlural}, pagination) => {
+    set({ pagination, {entityCamelPlural} });
+  },
+  setSelected{entity}: (selected{entity}) => {
+    set({ selected{entity} });
+  },
+}));

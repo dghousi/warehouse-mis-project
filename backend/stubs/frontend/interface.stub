@@ -1,0 +1,20 @@
+import { type ApiResponse, type PaginatedApiResponse } from '@/types/ApiResponse';
+import { type {entity} } from '../entities/{entity}';
+
+export type {entity}RepositoryInterface = {
+  create{entity}: ({entityCamel}: Omit<{entity}, 'id' | 'createdAt' | 'updatedAt'>) => Promise<ApiResponse<{entity}>>;
+  get{entity}: (id: string | number) => Promise<ApiResponse<{entity}>>;
+  update{entity}: (
+    id: string | number,
+    {entityCamel}: Partial<Omit<{entity}, 'id' | 'createdAt' | 'updatedAt'>>
+  ) => Promise<ApiResponse<{entity}>>;
+  delete{entity}: (id: string | number) => Promise<ApiResponse<null>>;
+  paginate: (
+    search?: string,
+    searchFields?: string[],
+    relations?: string[],
+    filters?: Record<string, string[]>,
+    page?: number,
+    perPage?: number
+  ) => Promise<ApiResponse<PaginatedApiResponse<{entity}[]>>>;
+};

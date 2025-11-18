@@ -1,0 +1,11 @@
+import { type {entity} } from '@/modules/{moduleKebab}/domain/entities/{entity}';
+import { type {entity}RepositoryInterface } from '@/modules/{moduleKebab}/domain/interfaces/{entity}RepositoryInterface';
+import { type ApiResponse } from '@/types/ApiResponse';
+
+export class Get{entity}UseCase {
+  constructor(private readonly {entityCamel}Repository: {entity}RepositoryInterface) {}
+
+  async execute(id: string | number): Promise<ApiResponse<{entity}>> {
+    return this.{entityCamel}Repository.get{entity}(id);
+  }
+}

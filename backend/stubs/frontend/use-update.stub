@@ -1,0 +1,99 @@
+import { useMutation, UseMutationResult, useQueryClient } from '@tanstack/react-query';
+
+import { type {entity} } from '@/modules/{moduleKebab}/domain/entities/{entity}';
+import { Update{entity}UseCase } from '@/modules/{moduleKebab}/application/use-cases/{entityKebabPlural}/update-{entityKebab}-use-case';
+import { {entity}Repository } from '@/modules/{moduleKebab}/infrastructure/repositories/{entityKebab}-repository';
+import { type ApiResponse, type PaginatedApiResponse } from '@/types/ApiResponse';
+
+import { {entityCamel}Config } from '../../config/{entityKebab}-config';
+
+type Update{entity}MutationContext = {
+  previous{entityPlural}: [string[], ApiResponse<PaginatedApiResponse<{entity}[]>> | undefined][];
+  previous{entity}?: ApiResponse<{entity}>;
+};
+
+type Update{entity}Variables = {
+  id: string | number;
+  data: Partial<Omit<{entity}, 'id' | 'createdAt' | 'updatedAt'>>;
+};
+
+export const useUpdate{entity} = (): UseMutationResult<
+  ApiResponse<{entity}>,
+  Error,
+  Update{entity}Variables,
+  Update{entity}MutationContext
+> => {
+  const queryClient = useQueryClient();
+
+  return useMutation<
+    ApiResponse<{entity}>,
+    Error,
+    { id: string | number; data: Partial<Omit<{entity}, 'id' | 'createdAt' | 'updatedAt'>> },
+    Update{entity}MutationContext
+  >({
+    mutationFn: ({ data, id }) => {
+      const {entityCamel}Repository = new {entity}Repository();
+      const update{entity}UseCase = new Update{entity}UseCase({entityCamel}Repository);
+      return update{entity}UseCase.execute(id, data);
+    },
+    mutationKey: [{entityCamel}Config.queryKey, 'update'],
+    onError: (_, { id }, context) => {
+      if (context?.previous{entityPlural}) {
+        for (const [queryKey, data] of context.previous{entityPlural}) {
+          queryClient.setQueryData(queryKey, data);
+        }
+      }
+      if (context?.previous{entity}) {
+        queryClient.setQueryData([{entityCamel}Config.singleQueryKey, id], context.previous{entity});
+      }
+    },
+    onMutate: async ({ data, id }) => {
+      const listQueryKey = [{entityCamel}Config.queryKey];
+      const singleQueryKey = [{entityCamel}Config.singleQueryKey, id];
+      await queryClient.cancelQueries({ queryKey: listQueryKey });
+      await queryClient.cancelQueries({ queryKey: singleQueryKey });
+
+      const previous{entityPlural} = queryClient.getQueriesData<ApiResponse<PaginatedApiResponse<{entity}[]>>>({
+        queryKey: listQueryKey,
+      }) as [string[], ApiResponse<PaginatedApiResponse<{entity}[]>> | undefined][];
+
+      const previous{entity} = queryClient.getQueryData<ApiResponse<{entity}>>(singleQueryKey);
+
+      queryClient.setQueriesData<ApiResponse<PaginatedApiResponse<{entity}[]>>>(
+        { queryKey: listQueryKey },
+        (old) => {
+          if (!old?.data?.data) return old;
+          return {
+            ...old,
+            data: {
+              ...old.data,
+              data: old.data.data.map((item) =>
+                item.id === id ? { ...item, ...data, updatedAt: new Date().toISOString() } : item
+              ),
+            },
+          };
+        }
+      );
+
+      queryClient.setQueryData<ApiResponse<{entity}>>(singleQueryKey, (old) => {
+        if (!old?.data) return old;
+        return {
+          ...old,
+          data: { ...old.data, ...data, updatedAt: new Date().toISOString() },
+        };
+      });
+
+      return { previous{entity}, previous{entityPlural} };
+    },
+    onSettled: (_, __, { id }) => {
+      queryClient.invalidateQueries({
+        exact: false,
+        queryKey: [{entityCamel}Config.queryKey],
+      });
+      queryClient.invalidateQueries({
+        exact: true,
+        queryKey: [{entityCamel}Config.singleQueryKey, id],
+      });
+    },
+  });
+};

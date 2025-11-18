@@ -1,0 +1,108 @@
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { toast } from 'sonner';
+
+import { type {entity} } from '@/modules/{moduleKebab}/domain/entities/{entity}';
+import { List{entityPlural}UseCase } from '@/modules/{moduleKebab}/application/use-cases/{entityKebabPlural}/list-{entityKebabPlural}-use-case';
+import { {entity}Repository } from '@/modules/{moduleKebab}/infrastructure/repositories/{entityKebab}-repository';
+import {
+  type ApiErrorDetail,
+  type ApiResponse,
+  type PaginatedApiResponse,
+  type PaginationLinks,
+  type PaginationMeta,
+} from '@/types/ApiResponse';
+
+import { {entityCamel}Config } from '../../config/{entityKebab}-config';
+
+export type {entity}ListResponse = {
+  entities: {entity}[];
+  pagination?: PaginationMeta;
+  links?: PaginationLinks;
+  isFetching: boolean;
+  error: ApiErrorDetail | null;
+  message: string;
+  refetch: () => Promise<void>;
+};
+
+export const use{entity}List = (
+  page: number = 1,
+  perPage: number = 10,
+  search: string = '',
+  searchFields: string[] = {entityCamel}Config.searchFields?.map((field) => field.value) || [],
+  relations: string[] = {entityCamel}Config.relations ?? [],
+  filters: Record<string, string[]> = {}
+): {entity}ListResponse => {
+  const queryClient = useQueryClient();
+  const queryKey = [
+    {entityCamel}Config.queryKey,
+    page,
+    perPage,
+    search,
+    searchFields.join(','),
+    relations,
+    JSON.stringify(filters),
+  ] as const;
+
+  const {
+    data,
+    error,
+    isFetching,
+    refetch: queryRefetch,
+  } = useQuery<ApiResponse<PaginatedApiResponse<{entity}[]>>>({
+    enabled: !queryClient.isMutating({
+      predicate: (mutation) =>
+        mutation.options.mutationKey?.[0] === {entityCamel}Config.queryKey &&
+        ['create', 'update', 'delete'].includes(mutation.options.mutationKey?.[1] as string),
+    }),
+    gcTime: 10 * 60 * 1000,
+    placeholderData: (previous) => previous,
+    queryFn: async () => {
+      const {entityCamel}Repository = new {entity}Repository();
+      const list{entityPlural}UseCase = new List{entityPlural}UseCase({entityCamel}Repository);
+      const response = await list{entityPlural}UseCase.execute(
+        search,
+        searchFields,
+        relations,
+        filters,
+        page,
+        perPage
+      );
+      if (response.error) {
+        toast.error(response.error.message || 'Failed to fetch {entityHeadLinePlural}', {
+          position: 'top-center',
+          style: {
+            background: '#ef4444',
+            border: '1px solid #e5e7eb',
+            color: '#ffffff',
+          },
+        });
+      }
+      return response;
+    },
+    queryKey,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+    retry: 2,
+    staleTime: 5 * 60 * 1000,
+  });
+
+  const refetch = async (): Promise<void> => {
+    await queryRefetch();
+  };
+
+  return {
+    entities: data?.data?.data ?? [],
+    error: error
+      ? {
+          code: error.name || '{entitySnakeUpper}_LIST_ERROR',
+          details: null,
+          message: error.message || 'Failed to fetch {entityHeadLinePlural}',
+        }
+      : (data?.error ?? null),
+    isFetching,
+    links: data?.data?.links,
+    message: data?.message ?? error?.message ?? '{entityHeadLinePlural} fetched successfully',
+    pagination: data?.data?.meta,
+    refetch,
+  };
+};

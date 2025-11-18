@@ -1,0 +1,184 @@
+{
+  "config": {
+    "title": "کارن",
+    "entity": "کارن",
+    "table": {
+      "add": "کارن زیاتول",
+      "create": "کارن جوړول",
+      "edit": "کارن سمول",
+      "update": "کارن تازه کول",
+      "personalInfo": "شخصي معلومات",
+      "jobTitle/organization": "دندې عنوان / سازمان",
+      "contactInfo": "د تماس معلومات",
+      "reportTo": "Report To"
+    },
+    "form": {
+      "firstName": {
+        "label": "لومړی نوم",
+        "validation": {
+          "required": "لومړی نوم اړین دی",
+          "maxLength": "لومړی نوم باید ۲۵۵ توري یا لږ وي"
+        }
+      },
+      "lastName": {
+        "label": "وروستی نوم",
+        "validation": {
+          "maxLength": "وروستی نوم باید ۲۵۵ توري یا لږ وي"
+        }
+      },
+      "attachment": {
+        "label": "ضمیمه",
+        "validation": {
+          "mimes": "ضمیمه باید یوه معتبره عکس وي (jpg, jpeg, png)",
+          "maxSize": "ضمیمه باید له ۵ مګابایټه کم وي"
+        }
+      },
+      "jobTitle": {
+        "label": "دندې عنوان",
+        "validation": {
+          "required": "دندې عنوان اړین دی",
+          "maxLength": "دندې عنوان باید ۲۵۵ توري یا لږ وي"
+        }
+      },
+      "reportToId": {
+        "label": "د راپور ورکولو آی‌ډي",
+        "validation": {
+          "pattern": "د راپور ورکولو آی‌ډي باید عدد وي"
+        }
+      },
+      "email": {
+        "label": "برېښنالیک",
+        "validation": {
+          "required": "برېښنالیک اړین دی",
+          "email": "د برېښنالیک فورم نامعتبره ده",
+          "maxLength": "برېښنالیک باید ۲۵۵ توري یا لږ وي"
+        }
+      },
+      "emailVerifiedAt": {
+        "label": "برېښنالیک په"
+      },
+      "contactNumber": {
+        "label": "د تماس شمېره",
+        "validation": {
+          "maxLength": "د تماس شمېره باید ۲۵۵ توري یا لږ وي"
+        }
+      },
+      "whatsappNumber": {
+        "label": "واتساپ شمېره",
+        "validation": {
+          "maxLength": "واتساپ شمېره باید ۲۵۵ توري یا لږ وي"
+        }
+      },
+      "password": {
+        "label": "پاسورډ",
+        "validation": {
+          "required": "پاسورډ اړین دی",
+          "minLength": "پاسورډ باید لږ تر لږه ۸ توري ولري",
+          "maxLength": "پاسورډ باید ۲۵۵ توري یا لږ وي"
+        }
+      },
+      "locale": {
+        "label": "ژبه",
+        "validation": {
+          "in": "ژبه باید د اجازه لرونکو ارزښتونو څخه یوه وي"
+        },
+        "options": {
+          "en": "انګلیسي",
+          "dr": "دري",
+          "ps": "پښتو"
+        }
+      },
+      "mainOrganizationId": {
+        "label": "د اصلي سازمان آی‌ډي",
+        "validation": {
+          "pattern": "اصلي سازمان آی‌ډي باید عدد وي"
+        }
+      },
+      "rights": {
+        "label": "حقوق",
+        "validation": {
+          "in": "حقوق باید د اجازه لرونکو ارزښتونو څخه یوه وي"
+        },
+        "options": {
+          "create": "جوړول",
+          "review": "کتنه",
+          "approval": "تأیید"
+        }
+      },
+      "notifications": {
+        "label": "خبرتیاوې"
+      },
+      "enabled": {
+        "label": "فعال شوی",
+        "options": {
+          "active": "فعال",
+          "inactive": "غیرفعال"
+        }
+      },
+      "status": {
+        "label": "حالت",
+        "validation": {
+          "in": "حالت باید د اجازه لرونکو ارزښتونو څخه یوه وي"
+        },
+        "options": {
+          "pending": "په انتظار",
+          "approved": "تأیید شوی",
+          "rejected": "رد شوی",
+          "uploadForm": "فارم اپلوډ کړئ"
+        }
+      },
+      "remarks": {
+        "label": "یادښتونه",
+        "validation": {
+          "maxLength": "یادښتونه باید ۲۵۵ توري یا لږ وي"
+        }
+      },
+      "lastLoginAt": {
+        "label": "وروستې ننوتنه په"
+      },
+      "userForm": {
+        "label": "د کارن فورم",
+        "validation": {
+          "maxLength": "د کارن فورم باید ۲۵۵ توري یا لږ وي"
+        }
+      },
+      "createdBy": {
+        "label": "جوړ شوی د لخوا",
+        "validation": {
+          "pattern": "جوړ شوی د لخوا باید عدد وي"
+        }
+      },
+      "updatedBy": {
+        "label": "تازه شوی د لخوا",
+        "validation": {
+          "pattern": "تازه شوی د لخوا باید عدد وي"
+        }
+      },
+      "roles": {
+        "label": "نقشونه",
+        "validation": {
+          "maxLength": "نقشونه باید ۲۵۵ توري یا لږ وي"
+        }
+      },
+      "permissions": {
+        "label": "اجازات",
+        "validation": {
+          "maxLength": "اجازات باید ۲۵۵ توري یا لږ وي"
+        }
+      }
+    },
+    "repository": {
+      "createFailed": "د کارن جوړول بریالي نشول",
+      "fetchFailed": "د کارن ترلاسه کول بریالي نشول",
+      "updateFailed": "د کارن تازه کول بریالي نشول",
+      "deleteFailed": "د کارن حذف کول بریالي نشول",
+      "fetchManyFailed": "د کارنان ترلاسه کول بریالي نشول",
+      "fetchManySuccess": "کارنان په بریالیتوب سره ترلاسه شول"
+    },
+    "presentation": {
+      "createSuccess": "User created successfully",
+      "updateSuccess": "User updated successfully",
+      "deleteSuccess": "User deleted successfully"
+    }
+  }
+}

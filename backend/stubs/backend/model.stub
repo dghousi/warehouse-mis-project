@@ -1,0 +1,47 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Modules\{{ module }}\Domain\Entities;
+
+{{ model_uses }}
+use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Illuminate\Database\Eloquent\SoftDeletes;
+{{ relation_types }}
+
+final class {{ entity }} extends Model
+{
+    use LogsActivity;
+    use SoftDeletes;
+
+    protected $fillable = [
+        {{ fillable }}
+    ];
+
+    protected function casts(): array
+    {
+        return [
+            {{ casts }}
+        ];
+    }
+
+    public function prunable()
+    {
+        return self::onlyTrashed()
+            ->where('deleted_at', '<', now()->subMonths(6));
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly([])
+            ->logOnlyDirty()
+            ->dontSubmitEmptyLogs()
+            ->useLogName(class_basename($this))
+            ->setDescriptionForEvent(fn (string $eventName): string => "{{ entity }} {$eventName}");
+    }
+
+    {{ relationships }}
+}

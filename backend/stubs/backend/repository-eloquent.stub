@@ -1,0 +1,93 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Modules\{{ module }}\Infrastructure\Repositories;
+
+use App\Modules\Common\Application\Exceptions\ApiException;
+use App\Modules\Common\Infrastructure\Repositories\BaseEloquentRepository;
+use App\Modules\{{ module }}\Domain\Entities\{{ entity }};
+use App\Modules\{{ module }}\Domain\Repositories\{{ entity }}RepositoryInterface;
+use App\Modules\{{ module }}\Infrastructure\Http\Requests\{{ entity }}\List{{ entityPlural }}Request;
+use Spatie\QueryBuilder\QueryBuilder;
+
+final class Eloquent{{ entity }}Repository extends BaseEloquentRepository implements {{ entity }}RepositoryInterface
+{
+    protected string $model = {{ entity }}::class;
+
+    protected string $requestClass = List{{ entityPlural }}Request::class;
+
+    public function find(int $id): {{ entity }}
+    {
+        return QueryBuilder::for($this->model)
+            ->allowedFields($this->getAllowedFields())
+            ->allowedIncludes($this->requestClass::getAllowedRelations())
+            ->findOrFail($id);
+    }
+
+    public function findTrashed(int $id): ?{{ entity }}
+    {
+        return QueryBuilder::for($this->model)
+            ->onlyTrashed()
+            ->allowedFields($this->getAllowedFields())
+            ->allowedIncludes($this->requestClass::getAllowedRelations())
+            ->find($id);
+    }
+
+    public function create(array $data): {{ entity }}
+    {
+        return {{ entity }}::create(attributes: $data);
+    }
+
+    public function update(int $id, array $data): {{ entity }}
+    {
+        ${{ entityCamel }} = $this->find($id);
+        ${{ entityCamel }}->update(attributes: $data);
+        return ${{ entityCamel }};
+    }
+
+    public function delete(int $id): void
+    {
+        ${{ entityCamel }} = $this->find(id: $id);
+        $this->guardAgainstRelatedRecords(${{ entityCamel }});
+        ${{ entityCamel }}->delete();
+    }
+
+    public function forceDelete(int $id): void
+    {
+        ${{ entityCamel }} = {{ entity }}::withTrashed()->findOrFail($id);
+        $this->guardAgainstRelatedRecords(${{ entityCamel }});
+        ${{ entityCamel }}->forceDelete();
+    }
+
+    public function restore(int $id): {{ entity }}
+    {
+        ${{ entityCamel }} = {{ entity }}::withTrashed()->findOrFail($id);
+        ${{ entityCamel }}->restore();
+        return ${{ entityCamel }};
+    }
+
+    private function getAllowedFields(): array
+    {
+        $fields = request()->input('fields');
+        if (! $fields) {
+            return [];
+        }
+
+        $allowed = array_keys($this->requestClass::getFieldableColumns());
+        $requested = array_filter(explode(',', (string) $fields));
+
+        return array_intersect($requested, $allowed);
+    }
+
+    private function guardAgainstRelatedRecords({{ entity }} ${{ entityCamel }}): void
+    {
+        if (method_exists(${{ entityCamel }}, 'hasRelatedRecords') && ${{ entityCamel }}->hasRelatedRecords()) {
+            throw new ApiException(
+                errorCode: '{{ entitySnakeUpper }}_IN_USE',
+                message: 'Cannot delete {{ entitySnake }} because it has related records.',
+                httpCode: 409
+            );
+        }
+    }
+}

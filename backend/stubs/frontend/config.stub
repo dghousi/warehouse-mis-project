@@ -1,0 +1,26 @@
+import { type EntityModuleConfig } from '@/types/EntityModuleConfig';
+
+export const {entityName}Config: EntityModuleConfig = {
+  columns: [
+    {columns}
+  ],
+  createButton: '{createButton}',
+  createSubmitText: '{createSubmitText}',
+  createTitle: '{createTitle}',
+  editButton: '{editButton}',
+  editSubmitText: '{editSubmitText}',
+  editTitle: '{editTitle}',
+  entity: 'config.entity',
+  filters: [
+    {filters}
+  ],
+  formFields: [
+    {formFields}
+  ],
+  queryKey: '{queryKey}',
+  searchFields: {searchFields},
+  singleQueryKey: '{singleQueryKey}',
+  title: 'config.title',
+   sortableColumns: {sortableColumns},
+  relations: {relations},
+};

@@ -1,0 +1,59 @@
+{
+  "config": {
+    "title": "صلاحیت ها",
+    "entity": "صلاحیت",
+    "table": {
+      "add": "افزودن صلاحیت",
+      "create": "ایجاد صلاحیت",
+      "edit": "ویرایش صلاحیت",
+      "update": "به‌روزرسانی صلاحیت",
+      "displayName": "Display Name"
+    },
+    "form": {
+      "name": {
+        "label": "نام",
+        "validation": {
+          "required": "نام ضروری است",
+          "maxLength": "نام باید ۲۵۵ حرف یا کمتر باشد"
+        }
+      },
+      "displayNameEn": {
+        "label": "نام نمایشی انگلیسی",
+        "validation": {
+          "maxLength": "نام نمایشی انگلیسی باید ۲۵۵ حرف یا کمتر باشد"
+        }
+      },
+      "displayNamePs": {
+        "label": "نام نمایشی پشتو",
+        "validation": {
+          "maxLength": "نام نمایشی پشتو باید ۲۵۵ حرف یا کمتر باشد"
+        }
+      },
+      "displayNameDr": {
+        "label": "نام نمایشی دری",
+        "validation": {
+          "maxLength": "نام نمایشی دری باید ۲۵۵ حرف یا کمتر باشد"
+        }
+      },
+      "guardName": {
+        "label": "نام نگهبان",
+        "validation": {
+          "maxLength": "نام نگهبان باید ۲۵۵ حرف یا کمتر باشد"
+        }
+      }
+    },
+    "repository": {
+      "createFailed": "ایجاد صلاحیت ناکام شد",
+      "fetchFailed": "گرفتن صلاحیت ناکام شد",
+      "updateFailed": "به‌روزرسانی صلاحیت ناکام شد",
+      "deleteFailed": "حذف صلاحیت ناکام شد",
+      "fetchManyFailed": "گرفتن چندین صلاحیت ناکام شد",
+      "fetchManySuccess": "صلاحیت‌ها با موفقیت دریافت شدند"
+    },
+    "presentation": {
+      "createSuccess": "Permission created successfully",
+      "updateSuccess": "Permission updated successfully",
+      "deleteSuccess": "Permission deleted successfully"
+    }
+  }
+}

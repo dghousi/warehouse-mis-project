@@ -1,0 +1,22 @@
+{
+  "platform": "پلاتفورم",
+  "name": "CPAMIS",
+  "userManagement": {
+    "title": "مدیریت کاربران",
+    "users": "کاربران",
+    "roles": "نقش‌ها",
+    "permissions": "اجازه‌ها"
+  },
+  "documentation": {
+    "title": "مستندات",
+    "users": "کاربران",
+    "permissions": "اجازه‌ها",
+    "settings": "تنظیمات"
+  },
+  "navUser": {
+    "loggingOut": "در حال خروج...",
+    "logout": "خروج",
+    "account": "Account",
+    "notifications": "Notifications"
+  }
+}

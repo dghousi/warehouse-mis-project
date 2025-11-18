@@ -1,0 +1,43 @@
+'use client';
+
+import { useTranslations } from 'next-intl';
+import { JSX } from 'react';
+
+import { Header } from '@/components/header';
+import { EntityListClient as EntityList } from '@/components/shared/entity/entity-list';
+import { {entityCamel}Config } from '@/modules/{moduleKebab}/presentation/config/{entityKebab}-config';
+import {
+  useCreate{entity},
+  useDelete{entity},
+  use{entity}List,
+  useUpdate{entity},
+} from '@/modules/{moduleKebab}/presentation/hooks';
+
+// eslint-disable-next-line react/function-component-definition
+export default function {entityPlural}Page(): JSX.Element {
+  const t = useTranslations('{entityCamel}');
+  const tSidebar = useTranslations('sidebar.{moduleCamel}');
+  return (
+    <>
+      <Header
+        breadcrumbs={[
+          { id: '{moduleCamel}', label: tSidebar('title') },
+          { id: '{entityCamelPlural}', isCurrent: true, label: t({entityCamel}Config.title) },
+        ]}
+      />
+      <div className="flex flex-1 flex-col">
+        <div className="@container/main flex flex-1 flex-col gap-2">
+          <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6 px-4 lg:px-6">
+            <EntityList
+              config={{entityCamel}Config}
+              fetchHook={use{entity}List}
+              useCreate={useCreate{entity}}
+              useUpdate={useUpdate{entity}}
+              useDelete={useDelete{entity}}
+            />
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
