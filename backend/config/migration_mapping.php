@@ -83,7 +83,7 @@ return [
                 'sort_order' => 'sort_order',
                 'created_at' => 'created_at',
                 'updated_at' => 'updated_at',
-            ]
+            ],
         ],
         'roles' => [
             'new_name' => 'roles',
@@ -91,13 +91,13 @@ return [
             'columns' => [
                 'id' => 'id',
                 'name' => [
-                    'target' => ['name', 'display_name_en', 'display_name_dr', 'display_name_ps']
+                    'target' => ['name', 'display_name_en', 'display_name_dr', 'display_name_ps'],
                 ],
                 'module_id' => 'module_id',
                 'guard_name' => 'guard_name',
                 'created_at' => 'created_at',
                 'updated_at' => 'updated_at',
-            ]
+            ],
         ],
         'permissions' => [
             'new_name' => 'permissions',
@@ -105,12 +105,12 @@ return [
             'columns' => [
                 'id' => 'id',
                 'name' => [
-                    'target' => ['name', 'display_name_en', 'display_name_dr', 'display_name_ps']
+                    'target' => ['name', 'display_name_en', 'display_name_dr', 'display_name_ps'],
                 ],
                 'guard_name' => 'guard_name',
                 'created_at' => 'created_at',
                 'updated_at' => 'updated_at',
-            ]
+            ],
         ],
         'model_has_roles' => [
             'new_name' => 'model_has_roles',
@@ -119,7 +119,7 @@ return [
                 'role_id' => 'role_id',
                 'model_id' => 'model_id',
                 'model_type' => 'model_type',
-            ]
+            ],
         ],
         'role_has_permissions' => [
             'new_name' => 'role_has_permissions',
@@ -127,7 +127,7 @@ return [
             'columns' => [
                 'permission_id' => 'permission_id',
                 'role_id' => 'role_id',
-            ]
+            ],
         ],
         'active_users' => [
             'new_name' => 'active_users',
@@ -138,69 +138,69 @@ return [
                 'lastactivity' => 'last_activity',
                 'created_at' => 'created_at',
                 'updated_at' => 'updated_at',
-            ]
+            ],
         ],
         'department_types' => [
             'new_name' => 'department_types',
             'order_by' => 'id',
             'columns' => [
                 'name' => [
-                    'target' => [ 'name_en', 'name_dr', 'name_ps']
+                    'target' => ['name_en', 'name_dr', 'name_ps'],
                 ],
                 'user_id' => 'user_id',
                 'hierarchy' => 'hierarchy',
                 'enabled' => 'enabled',
                 'created_at' => 'created_at',
                 'updated_at' => 'updated_at',
-            ]
+            ],
         ],
         'jobtypes' => [
             'new_name' => 'job_types',
             'order_by' => 'id',
             'columns' => [
                 'name' => [
-                    'target' => [ 'name_en', 'name_dr', 'name_ps']
+                    'target' => ['name_en', 'name_dr', 'name_ps'],
                 ],
                 'is_structure' => 'is_structure',
                 'department_type_id' => 'department_type_id',
                 'sort_order' => 'sort_order',
                 'created_at' => 'created_at',
                 'updated_at' => 'updated_at',
-            ]
+            ],
         ],
         'categories' => [
             'new_name' => 'categories',
             'order_by' => 'id',
             'columns' => [
                 'title' => [
-                    'target' => [ 'title_en', 'title_dr', 'title_ps']
+                    'target' => ['title_en', 'title_dr', 'title_ps'],
                 ],
                 'sort_order' => 'sort_order',
                 'created_at' => 'created_at',
                 'updated_at' => 'updated_at',
-            ]
+            ],
         ],
         'locations' => [
             'new_name' => 'locations',
             'order_by' => 'id',
             'columns' => [
                 'name' => [
-                    'target' => [ 'name_en', 'name_dr', 'name_ps']
+                    'target' => ['name_en', 'name_dr', 'name_ps'],
                 ],
                 'created_at' => 'created_at',
                 'updated_at' => 'updated_at',
-            ]
+            ],
         ],
         'structures' => [
             'new_name' => 'structures',
             'order_by' => 'id',
             'columns' => [
                 'name' => [
-                    'target' => [ 'name_en', 'name_dr', 'name_ps']
+                    'target' => ['name_en', 'name_dr', 'name_ps'],
                 ],
                 'created_at' => 'created_at',
                 'updated_at' => 'updated_at',
-            ]
-        ]
+            ],
+        ],
     ],
 ];

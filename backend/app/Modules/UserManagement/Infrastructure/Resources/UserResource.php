@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Collection;
 
-final class UserResource extends JsonResource
+class UserResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
@@ -16,42 +16,38 @@ final class UserResource extends JsonResource
             'id' => $this->id,
             'firstName' => $this->first_name,
             'lastName' => $this->last_name,
+            'profilePhotoPath' => $this->profile_photo_path,
             'jobTitle' => $this->job_title,
-            'reportToId' => $this->report_to_id,
-            'reportTo' => $this->whenLoaded('reportTo', fn (): ?array => $this->formatReportTo()),
-            'roles' => $this->whenLoaded('roles', fn () => $this->roles->pluck('name')),
             'email' => $this->email,
+            'emailVerifiedAt' => $this->email_verified_at,
             'contactNumber' => $this->contact_number,
             'whatsappNumber' => $this->whatsapp_number,
+            'password' => $this->password,
             'locale' => $this->locale,
-            'mainOrganizationId' => $this->main_organization_id,
             'rights' => $this->rights,
             'notifications' => $this->notifications,
             'enabled' => $this->enabled,
             'status' => $this->status,
             'remarks' => $this->remarks,
-            'lastLoginAt' => $this->last_login_at?->toIso8601String(),
-            'profilePhotoPath' => $this->fileUrl($this->profile_photo_path),
-            'userFormPath' => $this->fileUrl($this->user_form_path),
-            'createdBy' => $this->created_by,
-            'updatedBy' => $this->updated_by,
-            'deletedBy' => $this->deleted_by,
+            'lastLoginAt' => $this->last_login_at,
+            'userFormPath' => $this->user_form_path,
+            'token' => $this->token,
+            'createdAt' => $this->created_at,
+            'ipAddress' => $this->ip_address,
+            'userAgent' => $this->user_agent,
+            'payload' => $this->payload,
+            'lastActivity' => $this->last_activity,
+            'reportTo' => $this->reportTo,
+            'createdBy' => $this->createdBy,
+            'updatedBy' => $this->updatedBy,
+            'deletedBy' => $this->deletedBy,
+            'user' => $this->user,
+            'users' => $this->users,
+            'activeUsers' => $this->activeUsers,
+            'fileUploads' => $this->fileUploads,
             'createdAt' => $this->created_at?->toIso8601String(),
             'updatedAt' => $this->updated_at?->toIso8601String(),
         ]);
-    }
-
-    private function formatReportTo(): ?array
-    {
-        return $this->reportTo ? [
-            'id' => $this->reportTo->id,
-            'name' => trim("{$this->reportTo->first_name} {$this->reportTo->last_name}"),
-        ] : null;
-    }
-
-    private function fileUrl(?string $path): ?string
-    {
-        return $path ? asset("storage/{$path}") : null;
     }
 
     private function filterEmpty(array $data): array

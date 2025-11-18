@@ -50,22 +50,45 @@ final class GenerateBackendStructureCommand extends Command
 
             $this->info("Generated modular structure with CRUD operations for {$entity} in module {$module}.");
 
+            /*
+            |--------------------------------------------------------------------------
+            | Cross-platform Pint execution
+            |--------------------------------------------------------------------------
+            */
             $modulePath = base_path("app/Modules/{$module}");
+
             $this->info('Running Pint for formatting...');
 
-            exec("./vendor/bin/pint {$modulePath}", $output);
-            exec('./vendor/bin/pint bootstrap');
+            $pintCmd = $this->getPintCommand();
 
-            foreach ($output as $line) {
+            exec("{$pintCmd} {$modulePath}", $output1);
+            exec("{$pintCmd} bootstrap", $output2);
+
+            foreach (array_merge($output1, $output2) as $line) {
                 $this->line($line);
             }
 
             return 0;
+
         } catch (\Exception $e) {
             $this->error("Error generating structure for {$entity}: {$e->getMessage()}");
 
             return 1;
         }
+    }
+
+    /**
+     * Detect the correct executable format for Pint (Windows vs Linux/macOS).
+     */
+    private function getPintCommand(): string
+    {
+        // Windows uses "vendor\bin\pint.bat"
+        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+            return base_path('vendor\\bin\\pint.bat');
+        }
+
+        // MacOS/Linux use "./vendor/bin/pint"
+        return base_path('vendor/bin/pint');
     }
 
     private function findMigrationPath(string $entity): ?string
@@ -79,7 +102,7 @@ final class GenerateBackendStructureCommand extends Command
                 str_contains($file, "create_{$entitySnake}_table") ||
                 str_contains($file, "create_{$entityPluralSnake}_table")
             ) {
-                return $migrationDir.DIRECTORY_SEPARATOR.$file;
+                return $migrationDir . DIRECTORY_SEPARATOR . $file;
             }
         }
 

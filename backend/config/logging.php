@@ -62,7 +62,7 @@ return [
 
         'single' => [
             'driver' => 'single',
-            'path' => storage_path('logs/laravel.log'), //NOSONAR
+            'path' => storage_path('logs/laravel.log'), // NOSONAR
             'level' => env('LOG_LEVEL', 'debug'),
             'replace_placeholders' => true,
         ],

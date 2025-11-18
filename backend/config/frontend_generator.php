@@ -35,7 +35,7 @@ return [
         'enum' => 'string',
         'default' => 'string',
     ],
-   'validations' => [
+    'validations' => [
         'required' => [
             'rule' => 'required: "config.form.{name}.validation.required"',
             'condition' => [ValidationHelper::class, 'requiredCondition'],  // Updated function name

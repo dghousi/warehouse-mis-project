@@ -15,5 +15,4 @@ final class Role extends SpatieRole
         'display_name_ps',
         'display_name_dr',
     ];
-
 }

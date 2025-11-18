@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Modules\UserManagement\Infrastructure\Repositories;
 
-use App\Models\User;
 use App\Modules\Common\Application\Exceptions\ApiException;
 use App\Modules\Common\Infrastructure\Repositories\BaseEloquentRepository;
+use App\Modules\UserManagement\Domain\Entities\User;
 use App\Modules\UserManagement\Domain\Repositories\UserRepositoryInterface;
 use App\Modules\UserManagement\Infrastructure\Http\Requests\User\ListUsersRequest;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -42,8 +42,7 @@ final class EloquentUserRepository extends BaseEloquentRepository implements Use
     public function update(int $id, array $data): User
     {
         $user = $this->find($id);
-
-        $user->update($data);
+        $user->update(attributes: $data);
 
         return $user;
     }
@@ -51,33 +50,23 @@ final class EloquentUserRepository extends BaseEloquentRepository implements Use
     public function delete(int $id): void
     {
         $user = $this->find(id: $id);
-
         $this->guardAgainstRelatedRecords($user);
-
         $user->delete();
     }
 
     public function forceDelete(int $id): void
     {
         $user = User::withTrashed()->findOrFail($id);
-
         $this->guardAgainstRelatedRecords($user);
-
         $user->forceDelete();
     }
 
     public function restore(int $id): User
     {
         $user = User::withTrashed()->findOrFail($id);
-
         $user->restore();
 
         return $user;
-    }
-
-    public function updateLocale(User $user, string $locale): void
-    {
-        $user->update(['locale' => $locale]);
     }
 
     private function getAllowedFields(): array

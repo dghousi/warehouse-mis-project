@@ -8,12 +8,6 @@ use App\Modules\Common\Infrastructure\Http\Requests\BaseFormRequest;
 
 final class StoreUserRequest extends BaseFormRequest
 {
-    private const NULLABLE_STRING = 'nullable|string|max:255';
-
-    private const REQUIRED_STRING = 'required|string|max:255';
-
-    private const NULLABLE_INTEGER = 'nullable|integer';
-
     protected array $booleanFields = ['notifications', 'enabled'];
 
     public function authorize(): bool
@@ -24,35 +18,35 @@ final class StoreUserRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-            'firstName' => self::REQUIRED_STRING,
-            'lastName' => self::NULLABLE_STRING,
-            'profilePhotoPath' => [
-                'nullable',
-                'file',
-                'max:5120', // 5MB
-                'mimes:jpg,jpeg,png',
-            ],
-            'jobTitle' => self::REQUIRED_STRING,
-            'reportToId' => self::NULLABLE_INTEGER,
+            'firstName' => 'required|string|max:255',
+            'lastName' => 'nullable|string|max:255',
+            'profilePhotoPath' => 'nullable|string|max:255',
+            'jobTitle' => 'required|string|max:255',
             'email' => 'required|string|max:255|unique:users,email',
-            'contactNumber' => self::NULLABLE_STRING,
-            'whatsappNumber' => self::NULLABLE_STRING,
-            'password' => 'required|string|max:255|min:8',
-            'locale' => 'nullable|string|in:en,dr,ps',
-            'mainOrganizationId' => self::NULLABLE_INTEGER,
-            'rights' => 'nullable|string|in:create,review,approval',
+            'emailVerifiedAt' => 'nullable|date',
+            'contactNumber' => 'nullable|string|max:255',
+            'whatsappNumber' => 'nullable|string|max:255',
+            'password' => 'required|string|max:255',
+            'locale' => 'nullable|nullable|string|in:en,dr,ps',
+            'rights' => 'nullable|nullable|string|in:create,review,approval',
             'notifications' => 'nullable|boolean',
             'enabled' => 'nullable|boolean',
-            'status' => 'nullable|string|in:pending,approved,rejected,uploadForm',
-            'remarks' => self::NULLABLE_STRING,
+            'status' => 'nullable|nullable|string|in:pending,approved,rejected,uploadForm',
+            'remarks' => 'nullable|string|max:255',
             'lastLoginAt' => 'nullable|date',
-            'userFormPath' => [
-                'nullable',
-                'file',
-                'max:5120', // 5MB
-                'mimes:pdf,doc,docx,xls,xlsx',
-            ],
-            'createdBy' => self::NULLABLE_INTEGER,
+            'userFormPath' => 'nullable|string|max:255',
+            'reportToId' => 'nullable|integer|exists:report_tos,id',
+            'createdBy' => 'nullable|integer|exists:created_bies,id',
+            'updatedBy' => 'nullable|integer|exists:updated_bies,id',
+            'deletedBy' => 'nullable|integer|exists:deleted_bies,id',
+            'token' => 'required|string|max:255',
+            'createdAt' => 'nullable|date',
+            'id' => 'required|string|max:255',
+            'userId' => 'nullable|integer|exists:users,id',
+            'ipAddress' => 'nullable|string|max:255',
+            'userAgent' => 'nullable|string|max:255',
+            'payload' => 'required|string|max:255',
+            'lastActivity' => 'required|integer',
         ];
     }
 }

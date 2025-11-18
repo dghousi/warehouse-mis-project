@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Modules\UserManagement\Domain\Repositories;
 
-use App\Models\User;
 use App\Modules\Common\Application\DTOs\QuerySpecification;
+use App\Modules\UserManagement\Domain\Entities\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 interface UserRepositoryInterface
@@ -25,8 +25,6 @@ interface UserRepositoryInterface
     public function forceDelete(int $id): void;
 
     public function restore(int $id): User;
-
-    public function updateLocale(User $user, string $locale): void;
 
     public function invalidateCache(): void;
 }

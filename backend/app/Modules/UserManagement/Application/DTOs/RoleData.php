@@ -6,7 +6,6 @@ namespace App\Modules\UserManagement\Application\DTOs;
 
 final readonly class RoleData
 {
-
     public function __construct(
         public string $name,
         public string $displayNameEn,

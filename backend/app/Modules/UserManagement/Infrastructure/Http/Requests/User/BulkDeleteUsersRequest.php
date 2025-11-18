@@ -15,7 +15,7 @@ final class BulkDeleteUsersRequest extends BulkDeleteRequest
 
     protected function entityName(): string
     {
-        return 'users';
+        return 'User';
     }
 
     public function authorize(): bool
