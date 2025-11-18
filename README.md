@@ -1,4 +1,4 @@
-# cpamis-v2
+# project-builder
 
 
 
@@ -15,14 +15,14 @@ Already a pro? Just edit this README.md and make it your own. Want to make it ea
 
 ```
 cd existing_repo
-git remote add origin http://gitlab.aop.gov.af/dghousi/cpamis-v2.git
+git remote add origin http://gitlab.aop.gov.af/dghousi/project-builder.git
 git branch -M main
 git push -uf origin main
 ```
 
 ## Integrate with your tools
 
-- [ ] [Set up project integrations](http://gitlab.aop.gov.af/dghousi/cpamis-v2/-/settings/integrations)
+- [ ] [Set up project integrations](http://gitlab.aop.gov.af/dghousi/project-builder/-/settings/integrations)
 
 ## Collaborate with your team
 
