@@ -17,14 +17,14 @@ export default function Page(): JSX.Element {
           </div>
         </div>
       </div>
-      <div className="bg-muted relative hidden lg:block">
+      <div className="bg-muted relative hidden lg:flex items-center justify-center">
         <Image
-          src="/login-background-2.png"
-          fill
-          priority
+          src="/paamtech.png"
           alt="Image"
-          sizes="(max-width: 1024px) 0px, 50vw"
-          className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+          width={600}
+          height={600}
+          priority
+          className="object-contain dark:brightness-[0.2] dark:grayscale"
         />
       </div>
     </div>

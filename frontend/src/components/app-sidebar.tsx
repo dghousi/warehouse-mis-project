@@ -58,7 +58,7 @@ export const AppSidebar = (props: React.ComponentProps<typeof Sidebar>): React.J
           teams={[
             {
               logo: GalleryVerticalEnd,
-              name: t('name', { defaultValue: 'CPAMIS' }),
+              name: t('name', { defaultValue: 'PaamTech' }),
               plan: 'Enterprise',
             },
           ]}

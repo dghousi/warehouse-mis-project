@@ -26,8 +26,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  description: 'Developed By AOP',
-  title: 'CPAMIS',
+  description: 'Developed By PaamTech',
+  title: 'Warehouse MIS',
 };
 
 // eslint-disable-next-line react/function-component-definition
