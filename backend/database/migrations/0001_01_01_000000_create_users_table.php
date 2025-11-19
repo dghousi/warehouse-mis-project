@@ -96,7 +96,7 @@ return new class extends Migration
             $table->text('remarks')->nullable();
             $table->datetime('last_login_at')->nullable();
             $table->string('user_form_path')->nullable();
-            $table->foreignId('report_to_id')->default(0)->constrained('users');
+            $table->foreignId('report_to_id')->nullable();
             $table->foreignId('created_by')->nullable()->constrained('users');
             $table->foreignId('updated_by')->nullable()->constrained('users');
             $table->foreignId('deleted_by')->nullable()->constrained('users');
